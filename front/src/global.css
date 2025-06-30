@@ -1,0 +1,28 @@
+h4 {
+  font-family: 'Italiana', serif;
+  font-weight: bold;
+}
+
+.logo-wb {
+  height: 50px;
+  margin-right: 10px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .brand-logo {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .logo-wb {
+    height: 35px;
+    margin: auto;
+  }
+}
+
+ul.dropdown-content li a {
+    color: black !important;
+}
+
+

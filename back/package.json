@@ -1,0 +1,32 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "seed": "tsx src/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.15.33",
+    "prisma": "^6.8.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@prisma/client": "^6.8.2",
+    "fastify": "^5.3.3",
+    "npx": "^10.2.2",
+    "tsx": "^4.19.4"
+  },
+  "prisma": {
+    "seed": "tsx src/prisma/seed.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SarahBatagioti/ATVV-WB.git"
+  }
+}

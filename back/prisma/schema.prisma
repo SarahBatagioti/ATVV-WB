@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator tsx_seed {
+  provider = "prisma-client-js"
+}
+
+
+model cliente {
+  id           Int        @id @default(autoincrement())
+  nome         String
+  nomeSocial   String
+  genero       String
+  cpfId        Int        @unique(map: "Cliente_cpfId_key")
+  dataCadastro DateTime   @default(now())
+  cpf          cpf        @relation(fields: [cpfId], references: [id], map: "Cliente_cpfId_fkey")
+  rg           rg[]
+  telefone     telefone[]
+  produto      produto[]  @relation("produtosconsumidos")
+  servico      servico[]  @relation("servicosconsumidos")
+}
+
+model cpf {
+  id          Int      @id @default(autoincrement())
+  valor       String   @unique(map: "CPF_valor_key")
+  dataEmissao DateTime
+  cliente     cliente?
+}
+
+model produto {
+  id      Int       @id @default(autoincrement())
+  nome    String    @unique
+  preco   Float
+  cliente cliente[] @relation("produtosconsumidos")
+}
+
+
+model rg {
+  id          Int      @id @default(autoincrement())
+  valor       String   @unique(map: "RG_valor_key")
+  dataEmissao DateTime
+  clienteId   Int
+  cliente     cliente  @relation(fields: [clienteId], references: [id], map: "RG_clienteId_fkey")
+
+  @@index([clienteId], map: "RG_clienteId_fkey")
+}
+
+model servico {
+  id      Int       @id @default(autoincrement())
+  nome    String    @unique
+  preco   Float
+  cliente cliente[] @relation("servicosconsumidos")
+}
+
+model telefone {
+  id        Int     @id @default(autoincrement())
+  ddd       String
+  numero    String
+  clienteId Int
+  cliente   cliente @relation(fields: [clienteId], references: [id], map: "Telefone_clienteId_fkey")
+
+  @@index([clienteId], map: "Telefone_clienteId_fkey")
+}
